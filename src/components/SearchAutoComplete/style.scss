@@ -1,0 +1,87 @@
+$input-group-height: 2.75rem;
+
+.agol-group-data-search-autocomplete {
+    position: relative;
+    width: 100%;
+
+    .search-input-wrap{
+        position: relative;
+
+        .input-group {
+            width: 100%;
+            margin-top: 0;
+    
+            .input-group-input, 
+            .btn{
+                height: $input-group-height;
+            }
+        }
+
+        .clear-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0 .35rem;
+            height: $input-group-height;
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            cursor: pointer;
+
+            svg {
+                fill: red;
+                stroke: red;
+            }
+        }
+    }
+
+    .search-suggestion-wrap{
+        position: absolute;
+        box-sizing: border-box;
+        padding: 0;
+        border: 1px solid #efefef;
+        border-top: none;
+        width: 100%;
+        z-index: 20;
+        background-color: #ffffff;
+        box-shadow: 0 0 16px 0 rgba(0,0,0,0.05);
+
+        .search-suggestion-list{
+            width: 100%;
+
+            .suggestion-item {
+                display: flex;
+                padding: .5rem;
+                cursor: pointer;
+
+                .item-type-icon {
+                    width: 16px;
+                    height: 16px;;
+                }
+            }
+
+            .suggestion-item:hover {
+                background: #efefef;
+            }
+
+            .suggestion-item.is-active-condidate {
+                background: #ccc;
+            }
+        }
+    }
+
+    svg {
+        fill: #fff;
+        stroke: #fff;
+    }
+
+    .input-minimal {
+        border-bottom-color: transparent;
+
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iIzZlNmU2ZSI+PHBhdGggZD0iTTE0LjY1IDEzLjc0TDkuNzMyIDguODIzQTUuMzg3IDUuMzg3IDAgMSAwIDUuNSAxMC45MDRhNS4zNTggNS4zNTggMCAwIDAgMy4yODgtMS4xNDJsNC45MiA0Ljkyek01LjUgOS4yNWEzLjc1IDMuNzUgMCAxIDEgMy43NS0zLjc1MSAzLjc1MiAzLjc1MiAwIDAgMS0zLjc1IDMuNzV6Ii8+PC9zdmc+Cg==);
+        background-size: 1.06667em;
+        background-position: .25em center;
+        background-repeat: no-repeat;
+        padding-left: 1.5em;
+    }
+}
