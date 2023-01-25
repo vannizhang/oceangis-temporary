@@ -1,43 +1,38 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 
 import { loadModules } from 'esri-loader';
 
 import IMapView from 'esri/views/MapView';
-import ILegend from 'esri/widgets/Legend';
+import ILayerList from 'esri/widgets/LayerList';
 import IExpand from 'esri/widgets/Expand';
-// import { SiteContext } from '../../contexts/SiteContextProvider';
 
 interface Props {
     mapView?: IMapView;
 }
 
-const LegendWidget: React.FC<Props> = ({ mapView }) => {
-    // const { isMobile } = React.useContext(SiteContext)
-
-    // const [ legend, setLegend ] = React.useState<ILegend>();
-
+const LayersToggleWidget: FC<Props> = ({ mapView }: Props) => {
     const init = async () => {
-        type Modules = [typeof ILegend, typeof IExpand];
+        type Modules = [typeof ILayerList, typeof IExpand];
 
         try {
-            const [Legend, Expand] = await (loadModules([
-                'esri/widgets/Legend',
+            const [LayerList, Expand] = await (loadModules([
+                'esri/widgets/LayerList',
                 'esri/widgets/Expand',
             ]) as Promise<Modules>);
 
-            const legend = new Legend({
+            const layerLIst = new LayerList({
                 view: mapView,
             });
 
             const legendWidgetExpand = new Expand({
                 view: mapView,
-                content: legend,
-                expandIconClass: 'esri-icon-legend',
+                content: layerLIst,
+                expandIconClass: 'esri-icon-layers',
                 expanded: false,
                 mode: 'floating',
             });
 
-            mapView.ui.add(legendWidgetExpand, 'bottom-left');
+            mapView.ui.add(legendWidgetExpand, 'top-left');
         } catch (err) {
             console.error(err);
         }
@@ -52,4 +47,4 @@ const LegendWidget: React.FC<Props> = ({ mapView }) => {
     return null;
 };
 
-export default LegendWidget;
+export default LayersToggleWidget;

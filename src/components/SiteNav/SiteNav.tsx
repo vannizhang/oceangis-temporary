@@ -49,7 +49,7 @@ const SiteNav: React.FC<Props> = ({
                             </a>
                         </div>
 
-                        <div
+                        {/* <div
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -65,7 +65,7 @@ const SiteNav: React.FC<Props> = ({
                                     fill="#efefef"
                                 />
                             </svg>
-                        </div>
+                        </div> */}
 
                         {/* <div className='esri-sub-nav-link-list tablet-hide'>
                             { 

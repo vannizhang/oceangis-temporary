@@ -20,6 +20,7 @@ import {
 } from '../../utils/hash-params-manager/hashParamsManager';
 
 import queryItemsByIds from '../../utils/arcgis-online-group-data/queryItemsByIds';
+import LayersToggleWidget from '../LayersToggleWidget/LayersToggleWidget';
 
 const itemIdFromHashParam = getValueFromHashParams('itemId') as string;
 
@@ -96,6 +97,8 @@ const MapViewContainer = () => {
                     <LegendWidget />
 
                     {/* <LayerView item={activeItem} /> */}
+
+                    <LayersToggleWidget />
                 </MapView>
             ) : null}
 
