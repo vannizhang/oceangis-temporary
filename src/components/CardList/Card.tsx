@@ -64,6 +64,7 @@ Props) => {
                     <div
                         style={{
                             maxWidth: 295,
+                            marginBottom: '20px',
                         }}
                     >
                         <p className="font-size--1 trailer-0">
@@ -72,11 +73,11 @@ Props) => {
                             </a>
                         </p>
 
-                        {categoryLabel ? (
+                        {/* {categoryLabel ? (
                             <p className="font-size--3 trailer-quarter text-dark-gray">
                                 {categoryLabel}
                             </p>
-                        ) : null}
+                        ) : null} */}
                     </div>
 
                     <p className="font-size--3 trailer-half">

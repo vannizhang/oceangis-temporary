@@ -47,9 +47,7 @@ import { CategorySchemaMainCategory } from '../../utils/category-schema-manager'
 // };
 
 type ItemsByCategory = {
-    [key: string]: {
-        [key: string]: IItem[];
-    };
+    [key: string]: IItem[];
 };
 
 const groupSearchResultsByCategory = (
@@ -58,32 +56,29 @@ const groupSearchResultsByCategory = (
 ): ItemsByCategory => {
     const itemsByCategory: ItemsByCategory = {};
 
-    for (const { title, categories } of mainCategories) {
-        itemsByCategory[title] = {};
+    for (const { title } of mainCategories) {
+        itemsByCategory[title] = [];
 
-        for (const subcategory of categories) {
-            itemsByCategory[title][subcategory.title] = [];
-        }
+        // for (const subcategory of categories) {
+        //     itemsByCategory[title][subcategory.title] = [];
+        // }
     }
 
     for (const item of searchResults) {
         const { groupCategories } = item;
 
-        if (item.title === 'National Bridge Inventory') {
-            console.log(console.log(item));
-        }
+        // if (item.title === 'National Bridge Inventory') {
+        //     console.log(console.log(item));
+        // }
 
         for (const categoryStr of groupCategories) {
             // the original groupCategories is a string looks like: "/Categories/Structures"
             const components = categoryStr.split('/');
             const mainCategory = components[2];
-            const subcategory = components[3];
+            // const subcategory = components[3];
 
-            if (
-                itemsByCategory[mainCategory] &&
-                itemsByCategory[mainCategory][subcategory]
-            ) {
-                itemsByCategory[mainCategory][subcategory].push(item);
+            if (itemsByCategory[mainCategory]) {
+                itemsByCategory[mainCategory].push(item);
             }
         }
     }
@@ -93,14 +88,12 @@ const groupSearchResultsByCategory = (
 
 type AccordionGroup4MainCategoryProps = {
     mainCategory: string;
-    subCategories: {
-        [key: string]: IItem[];
-    };
+    items: IItem[];
 };
 
 const AccordionGroup4MainCategory: React.FC<AccordionGroup4MainCategoryProps> = ({
     mainCategory,
-    subCategories,
+    items,
 }: AccordionGroup4MainCategoryProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -109,26 +102,43 @@ const AccordionGroup4MainCategory: React.FC<AccordionGroup4MainCategoryProps> = 
     const activeItem: IItem = useSelector(activeWebmapSelector);
 
     const getAccordions = () => {
-        return Object.keys(subCategories).map((subcategory) => {
-            const items = subCategories[subcategory];
+        // return Object.keys(subCategories).map((subcategory) => {
+        //     const items = subCategories[subcategory];
 
-            return (
-                <SearchResultByCategory
-                    key={subcategory}
-                    title={subcategory}
-                    items={items}
-                    activeItem={activeItem}
-                    onSelect={(item) => {
-                        dispatch(setActiveItem(item));
-                    }}
-                    categoryLabelType={
-                        mainCategory === 'NGDA Theme'
-                            ? 'NGDA'
-                            : 'Department or Agency'
-                    }
-                />
-            );
-        });
+        //     return (
+        //         <SearchResultByCategory
+        //             key={subcategory}
+        //             title={subcategory}
+        //             items={items}
+        //             activeItem={activeItem}
+        //             onSelect={(item) => {
+        //                 dispatch(setActiveItem(item));
+        //             }}
+        //             categoryLabelType={
+        //                 mainCategory === 'NGDA Theme'
+        //                     ? 'NGDA'
+        //                     : 'Department or Agency'
+        //             }
+        //         />
+        //     );
+        // });
+
+        return (
+            <SearchResultByCategory
+                key={mainCategory}
+                title={mainCategory}
+                items={items}
+                activeItem={activeItem}
+                onSelect={(item) => {
+                    dispatch(setActiveItem(item));
+                }}
+                // categoryLabelType={
+                //     mainCategory === 'NGDA Theme'
+                //         ? 'NGDA'
+                //         : 'Department or Agency'
+                // }
+            />
+        );
     };
 
     return (
@@ -204,7 +214,7 @@ const SearchResultByCategoryContainer = () => {
                 <AccordionGroup4MainCategory
                     key={mainCategory}
                     mainCategory={mainCategory}
-                    subCategories={itemsByCategory[mainCategory]}
+                    items={itemsByCategory[mainCategory]}
                 />
             );
         });

@@ -8,52 +8,52 @@ import {
 
 import Card from '../CardList/Card';
 
-export type CategoryLabel = 'Department or Agency' | 'NGDA';
+// export type CategoryLabel = 'Department or Agency' | 'NGDA';
 
 type Props = {
     title: string;
     items: IItem[];
     activeItem: IItem;
     onSelect: (item: IItem) => void;
-    categoryLabelType: CategoryLabel;
+    // categoryLabelType: CategoryLabel;
 };
 
-const getCategoryLabel = (
-    category: string,
-    categoryLabelType: CategoryLabel
-) => {
-    if (!category) {
-        return '';
-    }
+// const getCategoryLabel = (
+//     category: string,
+//     categoryLabelType: CategoryLabel
+// ) => {
+//     if (!category) {
+//         return '';
+//     }
 
-    const components = category.split('/');
+//     const components = category.split('/');
 
-    if (categoryLabelType === 'NGDA') {
-        return 'NGDA Theme - ' + components[components.length - 1];
-    }
+//     if (categoryLabelType === 'NGDA') {
+//         return 'NGDA Theme - ' + components[components.length - 1];
+//     }
 
-    const department = components[components.length - 2].replace(
-        'Department of ',
-        ''
-    );
-    const agency = components[components.length - 1];
+//     const department = components[components.length - 2].replace(
+//         'Department of ',
+//         ''
+//     );
+//     const agency = components[components.length - 1];
 
-    return `${department}, ${agency}`;
-};
+//     return `${department}, ${agency}`;
+// };
 
 const SearchResultByCategory: React.FC<Props> = ({
     title,
     items,
     activeItem,
     onSelect,
-    categoryLabelType,
-}: Props) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+}: // categoryLabelType,
+Props) => {
+    // const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const getCardList = () => {
-        if (!isOpen || !items.length) {
-            return null;
-        }
+        // if (!isOpen || !items.length) {
+        //     return null;
+        // }
 
         const cards = items.map((item) => {
             // const { data, isActiveItemOnMap } = item;
@@ -69,16 +69,16 @@ const SearchResultByCategory: React.FC<Props> = ({
 
             const agolItemUrl = getAgolItemUrl(id);
 
-            const catgeory =
-                categoryLabelType === 'Department or Agency'
-                    ? groupCategories.filter((d: string) =>
-                          d.includes('Department or Agency')
-                      )[0]
-                    : groupCategories.filter((d: string) =>
-                          d.includes('NGDA')
-                      )[0];
+            // const catgeory =
+            //     categoryLabelType === 'Department or Agency'
+            //         ? groupCategories.filter((d: string) =>
+            //               d.includes('Department or Agency')
+            //           )[0]
+            //         : groupCategories.filter((d: string) =>
+            //               d.includes('NGDA')
+            //           )[0];
 
-            const categoryLabel = getCategoryLabel(catgeory, categoryLabelType);
+            // const categoryLabel = getCategoryLabel(catgeory, categoryLabelType);
 
             return (
                 <div key={`list-item-${id}`} className="block trailer-half">
@@ -91,7 +91,7 @@ const SearchResultByCategory: React.FC<Props> = ({
                         item={item}
                         isActiveItemOnMap={isActiveItemOnMap}
                         viewBtnOnClick={onSelect}
-                        categoryLabel={categoryLabel}
+                        categoryLabel={''}
                     />
                 </div>
             );
@@ -113,7 +113,7 @@ const SearchResultByCategory: React.FC<Props> = ({
 
     return (
         <div>
-            <div
+            {/* <div
                 style={{
                     borderBottom: '1px solid #efefef',
                 }}
@@ -139,7 +139,7 @@ const SearchResultByCategory: React.FC<Props> = ({
                         }`}
                     ></span>
                 </div>
-            </div>
+            </div> */}
 
             {getCardList()}
         </div>
