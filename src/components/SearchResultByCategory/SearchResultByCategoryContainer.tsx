@@ -95,51 +95,15 @@ const AccordionGroup4MainCategory: React.FC<AccordionGroup4MainCategoryProps> = 
     mainCategory,
     items,
 }: AccordionGroup4MainCategoryProps) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(true);
 
     const dispatch = useDispatch();
 
     const activeItem: IItem = useSelector(activeWebmapSelector);
 
-    const getAccordions = () => {
-        // return Object.keys(subCategories).map((subcategory) => {
-        //     const items = subCategories[subcategory];
-
-        //     return (
-        //         <SearchResultByCategory
-        //             key={subcategory}
-        //             title={subcategory}
-        //             items={items}
-        //             activeItem={activeItem}
-        //             onSelect={(item) => {
-        //                 dispatch(setActiveItem(item));
-        //             }}
-        //             categoryLabelType={
-        //                 mainCategory === 'NGDA Theme'
-        //                     ? 'NGDA'
-        //                     : 'Department or Agency'
-        //             }
-        //         />
-        //     );
-        // });
-
-        return (
-            <SearchResultByCategory
-                key={mainCategory}
-                title={mainCategory}
-                items={items}
-                activeItem={activeItem}
-                onSelect={(item) => {
-                    dispatch(setActiveItem(item));
-                }}
-                // categoryLabelType={
-                //     mainCategory === 'NGDA Theme'
-                //         ? 'NGDA'
-                //         : 'Department or Agency'
-                // }
-            />
-        );
-    };
+    if (!items.length) {
+        return null;
+    }
 
     return (
         <div>
@@ -175,7 +139,15 @@ const AccordionGroup4MainCategory: React.FC<AccordionGroup4MainCategoryProps> = 
                         // background: '#555'
                     }}
                 >
-                    {getAccordions()}
+                    <SearchResultByCategory
+                        key={mainCategory}
+                        title={mainCategory}
+                        items={items}
+                        activeItem={activeItem}
+                        onSelect={(item) => {
+                            dispatch(setActiveItem(item));
+                        }}
+                    />
                 </div>
             ) : null}
         </div>
