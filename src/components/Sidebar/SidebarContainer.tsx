@@ -44,7 +44,7 @@ const SidebarContainer: React.FC = ({ children }: Props) => {
             start: 1,
             num: MAX_QUERY_RESULTS,
         });
-        // console.log(response)
+        console.log(results);
         dispatch(loadItems(results));
     }, []);
 

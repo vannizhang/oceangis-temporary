@@ -5,12 +5,13 @@ import IMapView from 'esri/views/MapView';
 import IWebMap from 'esri/WebMap';
 import IwatchUtils from 'esri/core/watchUtils';
 import { MapCenterLocation } from '../../utils/hash-params-manager/hashParamsManager';
-import { BACKGROUND_WEB_MAP_ID } from '../../constants/ArcGIS';
+// import { BACKGROUND_WEB_MAP_ID } from '../../constants/ArcGIS';
 
 import { AppContext } from '../../contexts/AppContextProvider';
+loadCss();
 
 interface Props {
-    // itemId: string;
+    itemId: string;
     zoom?: number;
     center?: [number, number]; // [lon, lat]
     onStationary: (mapCenter: MapCenterLocation) => void;
@@ -20,7 +21,7 @@ interface Props {
 const MapView: React.FC<Props> = ({
     zoom,
     center,
-    // itemId,
+    itemId,
     onStationary,
     children,
 }: Props) => {
@@ -43,7 +44,7 @@ const MapView: React.FC<Props> = ({
                 container: mapDivRef.current,
                 map: new WebMap({
                     portalItem: {
-                        id: BACKGROUND_WEB_MAP_ID,
+                        id: itemId,
                     },
                 }),
                 center,
@@ -61,25 +62,25 @@ const MapView: React.FC<Props> = ({
         }
     };
 
-    // const setWebmap = async () => {
-    //     type Modules = [typeof IWebMap];
+    const setWebmap = async () => {
+        type Modules = [typeof IWebMap];
 
-    //     try {
-    //         const [WebMap] = await (loadModules(['esri/WebMap']) as Promise<
-    //             Modules
-    //         >);
+        try {
+            const [WebMap] = await (loadModules(['esri/WebMap']) as Promise<
+                Modules
+            >);
 
-    //         const webmap = new WebMap({
-    //             portalItem: {
-    //                 id: itemId,
-    //             },
-    //         });
+            const webmap = new WebMap({
+                portalItem: {
+                    id: itemId,
+                },
+            });
 
-    //         mapView.map = webmap;
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
+            mapView.map = webmap;
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const addWatchEvent = async () => {
         type Modules = [typeof IwatchUtils];
@@ -115,18 +116,17 @@ const MapView: React.FC<Props> = ({
         }
     };
 
-    useEffect(() => {
-        loadCss();
-        initMapView();
-    }, []);
-
     // useEffect(() => {
-    //     if (mapView) {
-    //         // setWebmap();
-    //     } else {
-    //         initMapView();
-    //     }
-    // }, [itemId]);
+    //     initMapView();
+    // }, []);
+
+    useEffect(() => {
+        if (mapView) {
+            setWebmap();
+        } else {
+            initMapView();
+        }
+    }, [itemId]);
 
     useEffect(() => {
         if (mapView) {

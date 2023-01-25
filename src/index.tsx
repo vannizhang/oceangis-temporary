@@ -16,13 +16,11 @@ import { RootPage } from './pages';
     const preloadedState = getPreloadedState();
 
     ReactDOM.render(
-        <React.StrictMode>
-            <ReduxProvider store={configureAppStore(preloadedState)}>
-                <AppContextProvider>
-                    <RootPage />
-                </AppContextProvider>
-            </ReduxProvider>
-        </React.StrictMode>,
+        <ReduxProvider store={configureAppStore(preloadedState)}>
+            <AppContextProvider>
+                <RootPage />
+            </AppContextProvider>
+        </ReduxProvider>,
         document.getElementById('root')
     );
 })();

@@ -76,7 +76,7 @@ const MapViewContainer = () => {
         >
             {activeItem ? (
                 <MapView
-                    // itemId={activeItem.id}
+                    itemId={activeItem.id}
                     zoom={mapCenterFromHashParam?.zoom}
                     center={
                         mapCenterFromHashParam
@@ -95,7 +95,7 @@ const MapViewContainer = () => {
 
                     <LegendWidget />
 
-                    <LayerView item={activeItem} />
+                    {/* <LayerView item={activeItem} /> */}
                 </MapView>
             ) : null}
 

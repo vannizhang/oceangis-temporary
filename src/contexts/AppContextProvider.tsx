@@ -53,7 +53,7 @@ const AppContextProvider: React.FC<AppContextProviderProps> = ({
                 groupId: groupId,
                 categorySchema,
                 queryParams: {
-                    // contentType: 'webmap',
+                    contentType: 'webmap',
                     sortField: 'modified',
                 },
             });

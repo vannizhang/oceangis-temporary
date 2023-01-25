@@ -205,9 +205,8 @@ const SearchResultByCategoryContainer = () => {
             a.localeCompare(b)
         );
 
-        console.log(mainCategories);
-
-        console.log(itemsByCategory);
+        // console.log(mainCategories);
+        // console.log(itemsByCategory);
 
         return mainCategories.map((mainCategory) => {
             return (
