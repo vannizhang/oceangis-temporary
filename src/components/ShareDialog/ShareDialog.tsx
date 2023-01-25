@@ -78,9 +78,9 @@ const ShareDialog: React.FC<Props> = ({
                 </span>
             </div>
 
-            <div className="leader-half">
+            {/* <div className="leader-half">
                 <AddToMyFavBtn />
-            </div>
+            </div> */}
         </div>
     );
 };

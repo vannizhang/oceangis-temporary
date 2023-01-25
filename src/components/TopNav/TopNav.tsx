@@ -32,7 +32,7 @@ const TopNav: React.FC = () => {
 
     const [isShareDialogVisible, setIsShareDialogVisible] = React.useState<
         boolean
-    >(true);
+    >(false);
 
     // const [ isMenuVisible, setIsMenuVisible ] = React.useState<boolean>(false);
 
